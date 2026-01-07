@@ -24,10 +24,10 @@ const passwordParameters = {
   includeNumbers: { enabled: true, chars: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] },
   includeSymbols: { enabled: true, chars: '@$' },
 };
-console.log(passwordParameters);
-console.log(passwordParameters);
-console.log(passwordParameters[Object.keys(passwordParameters)]);
-console.log(passwordParameters.includeUppercase[1]);
+// console.log(passwordParameters);
+// console.log(passwordParameters);
+// console.log(passwordParameters[Object.keys(passwordParameters)]);
+// console.log(passwordParameters.includeUppercase[1]);
 
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 // console.log(alphabet);
@@ -148,3 +148,25 @@ selectRandomCharacters(getActiveParams, 4);
 // ('abcdefghijklmnopqrstuvwxyz0123456789');
 
 // console.log(Math.floor(Math.random() * 10) + 1);
+
+const myWord = 'Jackman';
+let wordArray = myWord.split('');
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const randomChar = Math.floor(Math.random() * (i + 1));
+
+    [array[i], array[randomChar]] = [array[randomChar], array[i]];
+  }
+}
+
+console.log(wordArray);
+shuffle(wordArray);
+console.log(wordArray);
+// console.log(newWord);
+// const selectRandom = Math.floor(Math.random() * letterPool.length);
+
+// const removedL = letterPool.splice(selectRandom, 1);
+// console.log(letterPool[selectRandom]);
+// console.log(letterPool);
+// console.log(removedL);
