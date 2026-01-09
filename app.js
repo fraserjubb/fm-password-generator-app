@@ -35,16 +35,14 @@ function shuffle(array) {
   }
 }
 
-function getActiveParams() {
-  const activeParams = Object.fromEntries(Object.entries(passwordParameters).filter(([_, { enabled }]) => enabled));
+// function getActiveParams() {
+//   const activeParams = Object.fromEntries(Object.entries(passwordParameters).filter(([_, { enabled }]) => enabled));
 
-  return activeParams;
-}
+//   return activeParams;
+// }
 
 function getPassword(length) {
-  const activeParameters = getActiveParams();
-
-  const activeChars = Object.values(activeParameters)
+  const activeChars = Object.values(passwordParameters)
     .filter(param => param.enabled)
     .map(param => param.chars)
     .join('')
@@ -64,3 +62,6 @@ EVENT LISTENERS:
 */
 // console.log(getPassword(4));
 getPassword(25);
+// passwordParameters.includeNumbers.enabled = false;
+// passwordParameters.includeSymbols.enabled = false;
+// getPassword(25);
