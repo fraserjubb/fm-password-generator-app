@@ -18,7 +18,7 @@ const characterGroups = {
   includeUppercase: { enabled: true, chars: alphabet.toUpperCase() },
   includeLowercase: { enabled: true, chars: alphabet },
   includeNumbers: { enabled: true, chars: '0123456789' },
-  includeSymbols: { enabled: true, chars: `!@#$%^&*()-_+={}[]|\\:;"',.?/~` },
+  includeSymbols: { enabled: true, chars: '!@#$%^&*()-_+=.?|,' },
 };
 
 /* 
