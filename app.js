@@ -20,7 +20,7 @@ FUNCTIONS:
 */
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
-const passwordParameters = {
+const characterGroups = {
   includeUppercase: { enabled: true, chars: alphabet.toUpperCase() },
   includeLowercase: { enabled: true, chars: alphabet },
   includeNumbers: { enabled: true, chars: '0123456789' },
@@ -46,32 +46,35 @@ function selectRandom(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-function getPassword(length) {
+function getPassword(requestedLength) {
   const preShuffleArr = [];
 
-  console.log(preShuffleArr);
-
-  const activeChars = Object.values(passwordParameters)
+  console.log(requestedLength);
+  const enabledCharacterGroups = Object.values(characterGroups)
     .filter(param => param.enabled)
     .map(param => param.chars.split(''));
   // .join('')
   // .split('');
-
+  // console.log(activeChars.length);
+  if (enabledCharacterGroups.length > requestedLength) {
+    throw new Error('The requested password length is shorter than the enabled character groups.');
+  }
   // console.log(selectRandom(activeChars[0]));
   // Get at least one of each selected Parameter
-  for (let i = 0; i < activeChars.length; i++) {
-    const selectedCharacter = activeChars[i][selectRandom(activeChars[i])];
+  for (let i = 0; i < enabledCharacterGroups.length; i++) {
+    const selectedCharacter = enabledCharacterGroups[i][selectRandom(enabledCharacterGroups[i])];
     // console.log(selectedCharacter);
     preShuffleArr.push(selectedCharacter);
   }
-
-  const remainingLength = length - activeChars.length;
+  // console.log(preShuffleArr.length);
+  // console.log(activeChars.length);
+  const remainingLength = requestedLength - enabledCharacterGroups.length;
   // console.log(selectRandom(activeChars));
   // console.log(activeChars[selectRandom(activeChars)]);
   // console.log(activeChars.length);
   for (let i = 0; i < remainingLength; i++) {
     // console.log(activeChars[selectRandom(activeChars)]);
-    const chosenArray = activeChars[selectRandom(activeChars)];
+    const chosenArray = enabledCharacterGroups[selectRandom(enabledCharacterGroups)];
     const randomCharacter = chosenArray[selectRandom(chosenArray)];
     preShuffleArr.push(randomCharacter);
     // console.log(i);
@@ -100,7 +103,9 @@ EVENT LISTENERS:
 ********************************
 */
 // console.log(getPassword(4));
-getPassword(30);
+// getPassword(2);
+getPassword(5);
+
 // selectRandom([2, 4, 5]);
 // passwordParameters.includeNumbers.enabled = false;
 // console.log('again');
