@@ -65,28 +65,39 @@ function getPassword(requestedLength) {
     .filter(param => param.enabled)
     .map(param => param.chars.split(''));
 
-  const passwordStrength = enabledCharacterGroups.length;
-
-  switch (passwordStrength) {
-    case 1:
-      console.log('Strength of 1');
-      break;
-
-    case 2:
-      console.log('Strength of 2');
-      break;
-
-    case 3:
-      console.log('Strength of 3');
-      break;
-
-    case 4:
-      console.log('Strength of 4');
-      break;
-
-    default:
-      console.log('Strength of 0');
+  let passwordStrength;
+  if (enabledCharacterGroups.length === 0) {
+    console.log('Password has no groups enable');
+  } else {
+    passwordStrength = enabledCharacterGroups.length;
+    // console.log(passwordStrength);
+    // return passwordStrength;
   }
+  // console.log(passwordStrength);
+  // const passwordStrength = enabledCharacterGroups.length;
+  for (let i = 1; i <= passwordStrength; i++) {
+    console.log(`Password strength rating: ${i}`);
+  }
+  // switch (passwordStrength) {
+  //   case 1:
+  //     console.log('Strength of 1');
+  //     break;
+
+  //   case 2:
+  //     console.log('Strength of 2');
+  //     break;
+
+  //   case 3:
+  //     console.log('Strength of 3');
+  //     break;
+
+  //   case 4:
+  //     console.log('Strength of 4');
+  //     break;
+
+  //   default:
+  //     console.log('Strength of 0');
+  // }
 
   // Prevent a password being generated if no character groups are enabled:
   if (enabledCharacterGroups.length === 0) {
