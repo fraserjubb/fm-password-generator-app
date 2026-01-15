@@ -1,6 +1,3 @@
-// - Generate a password based on the selected inclusion options
-// - See a strength rating for their generated password
-
 /* 
 ********************************
 DOM SELECTORS:
@@ -10,6 +7,16 @@ const password = document.querySelector('.password__text');
 const generateBtn = document.querySelector('.password-generator__button');
 const passwordLengthValueEl = document.querySelector('.password-generator__length-value');
 const passwordLengthSlider = document.querySelector('#password-length');
+
+const uppercaseCheckbox = document.querySelector('#uppercase');
+const lowercaseCheckbox = document.querySelector('#lowercase');
+const numbersCheckbox = document.querySelector('#numbers');
+const symbolsCheckbox = document.querySelector('#symbols');
+// uppercaseCheckbox.checked = true;
+// console.log(uppercaseCheckbox.checked);
+
+// const fieldSet = document.querySelector('.password-generator__checkbox-group');
+// console.log(Array(fieldSet));
 /* 
 ********************************
 GLOBAL VARIABLES / OBJECTS:
@@ -18,10 +25,10 @@ GLOBAL VARIABLES / OBJECTS:
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
 const characterGroups = {
-  includeUppercase: { enabled: true, chars: alphabet.toUpperCase() },
-  includeLowercase: { enabled: true, chars: alphabet },
-  includeNumbers: { enabled: true, chars: '0123456789' },
-  includeSymbols: { enabled: true, chars: '!@#$%^&*()-_+=.?|,' },
+  includeUppercase: { enabled: false, chars: alphabet.toUpperCase() },
+  includeLowercase: { enabled: false, chars: alphabet },
+  includeNumbers: { enabled: false, chars: '0123456789' },
+  includeSymbols: { enabled: false, chars: '!@#$%^&*()-_+=.?|,' },
 };
 
 let passwordLength;
@@ -47,6 +54,11 @@ function getRandomIndex(array) {
 
 function getPassword(requestedLength) {
   const passwordPool = [];
+
+  characterGroups.includeUppercase.enabled = uppercaseCheckbox.checked;
+  characterGroups.includeLowercase.enabled = lowercaseCheckbox.checked;
+  characterGroups.includeNumbers.enabled = numbersCheckbox.checked;
+  characterGroups.includeSymbols.enabled = symbolsCheckbox.checked;
 
   // Find character groups that are enabled:
   const enabledCharacterGroups = Object.values(characterGroups)
