@@ -31,7 +31,7 @@ const characterGroups = {
   includeSymbols: { enabled: false, chars: '!@#$%^&*()-_+=.?|,' },
 };
 
-let passwordLength;
+let selectedCharacterLength;
 
 passwordLengthValueEl.textContent = passwordLengthSlider.value;
 /* 
@@ -52,11 +52,19 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-function getPassword(requestedLength) {
+function getPasswordStrength(enabledCharacterGroups) {
+  const passwordStrength = enabledCharacterGroups.length;
+
+  for (let i = 0; i <= passwordStrength - 1; i++) {
+    strengthBarArray[i].classList.add('password-generator__strength-bar--active');
+  }
+}
+
+function clearUI() {
   strengthBarArray.forEach(bar => bar.classList.remove('password-generator__strength-bar--active'));
+}
 
-  const passwordPool = [];
-
+function getEnabledCharacterGroups() {
   characterGroups.includeUppercase.enabled = uppercaseCheckbox.checked;
   characterGroups.includeLowercase.enabled = lowercaseCheckbox.checked;
   characterGroups.includeNumbers.enabled = numbersCheckbox.checked;
@@ -66,13 +74,15 @@ function getPassword(requestedLength) {
   const enabledCharacterGroups = Object.values(characterGroups)
     .filter(param => param.enabled)
     .map(param => param.chars.split(''));
+  return enabledCharacterGroups;
+}
 
-  const passwordStrength = enabledCharacterGroups.length;
+function getPassword(requestedLength) {
+  const passwordPool = [];
+  const enabledCharacterGroups = getEnabledCharacterGroups();
 
-  for (let i = 0; i <= passwordStrength - 1; i++) {
-    strengthBarArray[i].classList.add('password-generator__strength-bar--active');
-    console.log(`Password strength rating: ${i}`);
-  }
+  clearUI();
+  getPasswordStrength(enabledCharacterGroups);
 
   // Prevent a password being generated if no character groups are enabled:
   if (enabledCharacterGroups.length === 0) {
@@ -115,11 +125,6 @@ passwordLengthSlider.addEventListener('input', event => {
 });
 
 generateBtn.addEventListener('click', () => {
-  passwordLength = Number(passwordLengthValueEl.textContent);
-  getPassword(passwordLength);
+  selectedCharacterLength = Number(passwordLengthValueEl.textContent);
+  getPassword(selectedCharacterLength);
 });
-
-// characterGroups.includeNumbers.enabled = false;
-// console.log('again');
-// characterGroups.includeSymbols.enabled = false;
-// getPassword(100);
