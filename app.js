@@ -65,7 +65,29 @@ function getPassword(requestedLength) {
     .filter(param => param.enabled)
     .map(param => param.chars.split(''));
 
-  console.log(enabledCharacterGroups.length);
+  const passwordStrength = enabledCharacterGroups.length;
+
+  switch (passwordStrength) {
+    case 1:
+      console.log('Strength of 1');
+      break;
+
+    case 2:
+      console.log('Strength of 2');
+      break;
+
+    case 3:
+      console.log('Strength of 3');
+      break;
+
+    case 4:
+      console.log('Strength of 4');
+      break;
+
+    default:
+      console.log('Strength of 0');
+  }
+
   // Prevent a password being generated if no character groups are enabled:
   if (enabledCharacterGroups.length === 0) {
     throw new Error('No character groups have been selected for character generation.');
