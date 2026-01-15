@@ -126,6 +126,23 @@ h1 {
   color: var(--clr-purple-950);
 }
 
+.password-generator__feedback-container {
+  display: flex;
+}
+
+.password-generator__feedback-strength {
+  display: flex;
+  gap: 8px;
+}
+.password-generator__strength-bar {
+  width: 10px;
+  height: 28px;
+  border: solid 2px var(--clr-grey-200);
+}
+
+.password-generator__strength-bar--active {
+  background-color: hotpink;
+}
 /* 
 ********************************
 FOOTER:
