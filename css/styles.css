@@ -22,43 +22,26 @@
 
   /* Font sizes (in rem) */
   --fs-xs: 0.75rem; /* 12px */
-  --fs-sm: 0.875rem; /* 14px */
-  --fs-md: 1rem; /* 16px body text */
-  --fs-lg: 1.125rem; /* 18px */
-  --fs-xl: 1.75rem; /* 28px */
-
-  /* Font weights */
-  --fw-thin: 100;
-  --fw-extraLight: 200;
-  --fw-light: 300;
-  --fw-regular: 400;
-  --fw-medium: 500;
-  --fw-semiBold: 600;
-  --fw-bold: 700;
-  --fw-extraBold: 800;
-  --fw-black: 900;
+  --fs-sm: 1rem; /* 16px */
+  --fs-md: 1.125rem; /* 18px body text */
+  --fs-lg: 1.5rem; /* 24px */
+  --fs-xl: 2rem; /* 32px */
 
   /* Containers & Dimensions */
   --wrapper-width: 90rem; /* 1440px */
   --panel-width: 540px; /* 540px */
 
   /* Spacing scale (rem) */
-  --space-xs: 0.25rem; /* 4px */
-  --space-sm: 0.5rem; /* 8px */
-  --space-md: 0.75rem; /* 12px */
-  --space-lg: 1rem; /* 16px */
-  --space-xl: 1.5rem; /* 24px */
-  --space-2xl: 2rem; /* 32px */
-  --space-3xl: 2.5rem; /* 40px */
+  --space-sm: 1rem; /* 16px */
+  --space-md: 1.5rem; /* 24px */
+  --space-lg: 2rem; /* 32px */
 
   /* Border-radius scale */
-  --radius-sm: 0.25rem; /* 4px */
-  --radius-md: 0.5rem; /* 8px */
-  --radius-lg: 1rem; /* 16px */
   --radius-circle: 50%; /* circular elements */
 
   /* Line heights */
-  --lh-base: 1.5;
+  --lh-base: 1.33;
+  --lh-sm: 1.25;
 }
 
 /* 
@@ -98,11 +81,11 @@ GLOBAL CSS VALUES:
 body {
   font-family: 'JetBrains Mono', sans-serif;
   font-size: var(--fs-md);
-  font-weight: 400;
+  /* font-weight: 400; */
   line-height: var(--lh-base);
   letter-spacing: 0;
 
-  color: white;
+  color: var(--clr-grey-200);
   background: var(--clr-background-gradient);
 }
 
@@ -120,20 +103,162 @@ svg {
 MAIN:
 ********************************
 */
-h1 {
+.password-generator {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+  width: var(--panel-width);
+  margin: 133px auto;
+}
+
+.title {
+  color: var(--clr-grey-600);
+  font-size: --fs;
   text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.password-generator__container {
+}
+
+.password {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-lg);
+  background-color: var(--clr-grey-800);
+  height: 80px;
+  color: var(--clr-grey-700);
+  margin-bottom: var(--space-sm);
+}
+
+.password__text {
   font-size: var(--fs-xl);
-  color: var(--clr-purple-950);
+}
+
+.password__clipboard {
+}
+
+.password-generator-panel {
+  padding: var(--space-md) var(--space-lg);
+
+  background-color: var(--clr-grey-800);
+}
+
+.password-generator__character-length {
+  display: flex;
+  justify-content: space-between;
+}
+
+.password-generator__label {
+}
+
+.password-generator__length-value {
+  font-size: var(--fs-xl);
+  color: var(--clr-green-200);
+}
+
+#password-length {
+  width: 100%;
+  margin: 10px 0;
+  border-radius: 0;
+}
+
+/* Chrome / Safari */
+#password-length::-webkit-slider-runnable-track {
+  background: var(--clr-grey-850);
+  height: 8px;
+}
+
+/* Firefox */
+#password-length::-moz-range-track {
+  background: var(--clr-grey-850);
+  height: 8px;
+}
+
+#password-length {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+#password-length::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--clr-grey-200);
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-circle);
+  margin-top: -10px;
+}
+
+.password-generator__checkbox-group {
+  margin: var(--space-lg) 0;
+  border: none;
+}
+
+.password-generator__checkbox-group div {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+
+.password-generator__checkbox-group div:last-of-type {
+  margin-bottom: 0;
+}
+
+.password-generator__checkbox-group input[type='checkbox'] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--clr-grey-800);
+
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--clr-grey-200);
+
+  display: grid;
+  place-items: center;
+}
+
+.password-generator__checkbox-group input[type='checkbox']::after {
+  content: '';
+  width: 8px;
+  height: 13px;
+  border: solid var(--clr-grey-800);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+  border-width: 0 3px 3px 0;
+}
+
+.password-generator__checkbox-group input[type='checkbox']:checked {
+  background: var(--clr-green-200);
+}
+
+.password-generator__checkbox-group input[type='checkbox']:checked::after {
+  opacity: 1;
 }
 
 .password-generator__feedback-container {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--clr-grey-850);
+  margin-bottom: var(--space-lg);
+}
+
+.password-generator__feedback-text {
+  text-transform: uppercase;
+  color: var(--clr-grey-600);
 }
 
 .password-generator__feedback-strength {
   display: flex;
   gap: 8px;
 }
+
 .password-generator__strength-bar {
   width: 10px;
   height: 28px;
@@ -143,6 +268,23 @@ h1 {
 .password-generator__strength-bar--active {
   background-color: hotpink;
 }
+
+.password-generator__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+  height: 65px;
+  background-color: var(--clr-green-200);
+  text-transform: uppercase;
+  font-size: var(--fs-md);
+}
+
+.password-generator__button img {
+  width: 12px;
+}
+
 /* 
 ********************************
 FOOTER:
