@@ -52,8 +52,23 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-function getPasswordStrength(enabledCharacterGroups) {
-  const passwordStrength = enabledCharacterGroups.length;
+function getPasswordStrength(enabledGroups, characterLength) {
+  let strengthLevel;
+
+  if (enabledGroups.length === 0) return;
+
+  if (characterLength <= 8) {
+    strengthLevel = 1;
+  } else if (characterLength >= 16) {
+    strengthLevel = 4;
+  } else if (characterLength >= 12) {
+    strengthLevel = 3;
+  } else {
+    strengthLevel = 2; // 9–11 character length
+  }
+
+  const passwordStrength = Math.min(strengthLevel, 4);
+  // console.log(passwordStrength);
 
   for (let i = 0; i <= passwordStrength - 1; i++) {
     strengthBarArray[i].classList.add('password-generator__strength-bar--active');
@@ -82,7 +97,7 @@ function getPassword(requestedLength) {
   const enabledCharacterGroups = getEnabledCharacterGroups();
 
   clearUI();
-  getPasswordStrength(enabledCharacterGroups);
+  getPasswordStrength(enabledCharacterGroups, selectedCharacterLength);
 
   // Prevent a password being generated if no character groups are enabled:
   if (enabledCharacterGroups.length === 0) {
