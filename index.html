@@ -18,14 +18,14 @@
       <div class="password-generator__container">
         <section class="password">
           <output class="password__text" aria-live="polite">P4$5W0rD!</output>
-          <button><img src="assets/images/icon-copy.svg" alt="Copy password" class="password__clipboard" /></button>
+          <button class="password__clipboard"><img src="assets/images/icon-copy.svg" alt="Copy password" /></button>
         </section>
         <section class="password-generator-panel">
           <div class="password-generator__character-length">
             <label for="password-length" class="password-generator__label">Character Length</label>
             <p class="password-generator__length-value">0</p>
           </div>
-          <input type="range" id="password-length" name="password-length" min="0" max="20" />
+          <input type="range" id="password-length" name="password-length" min="0" max="20" value="0" />
 
           <fieldset class="password-generator__checkbox-group">
             <legend class="visually-hidden">Password options</legend>
