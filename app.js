@@ -3,8 +3,8 @@
 DOM SELECTORS:
 ********************************
 */
-const password = document.querySelector('.password__text');
-const generateBtn = document.querySelector('.password-generator__button');
+const password = document.querySelector('.password-generator__display-text');
+const generateBtn = document.querySelector('.password-generator__generate-button');
 const passwordLengthValueEl = document.querySelector('.password-generator__length-value');
 const passwordLengthSlider = document.querySelector('#password-length');
 
@@ -13,7 +13,7 @@ const lowercaseCheckbox = document.querySelector('#lowercase');
 const numbersCheckbox = document.querySelector('#numbers');
 const symbolsCheckbox = document.querySelector('#symbols');
 
-const strengthLocation = document.querySelector('.password-generator__feedback-strength');
+const strengthLocation = document.querySelector('.password-generator__strength-bars');
 
 const strengthBarArray = Array.from(document.querySelectorAll('.password-generator__strength-bar'));
 

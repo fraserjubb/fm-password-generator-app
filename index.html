@@ -14,13 +14,13 @@
   </head>
   <body>
     <main class="password-generator">
-      <h1 class="title">Password Generator</h1>
+      <h1 class="password-generator__title">Password Generator</h1>
       <div class="password-generator__container">
-        <section class="password">
-          <output class="password__text" aria-live="polite">P4$5W0rD!</output>
-          <button class="password__clipboard"><img src="assets/images/icon-copy.svg" alt="Copy password" /></button>
+        <section class="password-generator__display">
+          <output class="password-generator__display-text" aria-live="polite">P4$5W0rD!</output>
+          <button class="password-generator__display-clipboard"><img src="assets/images/icon-copy.svg" alt="Copy password" /></button>
         </section>
-        <section class="password-generator-panel">
+        <section class="password-generator__panel">
           <div class="password-generator__character-length">
             <label for="password-length" class="password-generator__label">Character Length</label>
             <p class="password-generator__length-value">0</p>
@@ -51,9 +51,9 @@
             </div>
           </fieldset>
 
-          <div class="password-generator__feedback-container">
-            <p class="password-generator__feedback-text">Strength</p>
-            <div class="password-generator__feedback-strength">
+          <div class="password-generator__strength">
+            <p class="password-generator__strength-label">Strength</p>
+            <div class="password-generator__strength-bars">
               <div class="password-generator__strength-bar"></div>
               <div class="password-generator__strength-bar"></div>
               <div class="password-generator__strength-bar"></div>
@@ -61,7 +61,7 @@
             </div>
           </div>
 
-          <button class="password-generator__button">Generate <img src="/assets/images/icon-arrow-right.svg" alt="" /></button>
+          <button class="password-generator__generate-button">Generate <img src="/assets/images/icon-arrow-right.svg" alt="" /></button>
         </section>
       </div>
     </main>
