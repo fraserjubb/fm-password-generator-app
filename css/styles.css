@@ -49,7 +49,6 @@
 SELF-HOSTING FONT:
 ********************************
 */
-
 @font-face {
   font-family: 'JetBrains Mono';
   src: url('/assets/fonts/JetBrainsMono-Bold.woff2') format('woff2'),
@@ -104,33 +103,35 @@ MAIN:
 ********************************
 */
 .password-generator {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
   width: var(--panel-width);
   margin: 133px auto;
 }
 
+/* Heading */
 .password-generator__title {
-  color: var(--clr-grey-600);
+  margin-bottom: var(--space-lg);
   font-size: var(--fs-lg);
   text-align: center;
-  margin-bottom: var(--space-lg);
+  color: var(--clr-grey-600);
 }
 
 .password-generator__container {
 }
 
+/* 
+****
+Password Generator Display 
+****
+*/
 .password-generator__display {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--space-sm) var(--space-lg);
-  background-color: var(--clr-grey-800);
   height: 80px;
-  color: var(--clr-grey-700);
+  padding: var(--space-sm) var(--space-lg);
   margin-bottom: var(--space-sm);
+  color: var(--clr-grey-700);
+  background-color: var(--clr-grey-800);
 }
 
 .password-generator__display-text {
@@ -142,12 +143,17 @@ MAIN:
   border: none;
 }
 
+/* 
+****
+Password Generator Controls 
+****
+*/
 .password-generator__panel {
   padding: 33px var(--space-lg) 42px;
-
   background-color: var(--clr-grey-800);
 }
 
+/* Character length */
 .password-generator__character-length {
   display: flex;
   justify-content: space-between;
@@ -170,14 +176,14 @@ MAIN:
 
 /* Chrome / Safari */
 #password-length::-webkit-slider-runnable-track {
-  background: var(--clr-grey-850);
   height: 8px;
+  background: var(--clr-grey-850);
 }
 
 /* Firefox */
 #password-length::-moz-range-track {
-  background: var(--clr-grey-850);
   height: 8px;
+  background: var(--clr-grey-850);
 }
 
 #password-length {
@@ -188,13 +194,14 @@ MAIN:
 #password-length::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  background: var(--clr-grey-200);
   width: 28px;
   height: 28px;
-  border-radius: var(--radius-circle);
   margin-top: -10px;
+  border-radius: var(--radius-circle);
+  background: var(--clr-grey-200);
 }
 
+/* Character groups checkboxes */
 .password-generator__checkbox-group {
   margin: var(--space-lg) 0;
   border: none;
@@ -214,11 +221,11 @@ MAIN:
 .password-generator__checkbox-group input[type='checkbox'] {
   -webkit-appearance: none;
   appearance: none;
-  background: var(--clr-grey-800);
 
   width: 20px;
   height: 20px;
   border: 2px solid var(--clr-grey-200);
+  background: var(--clr-grey-800);
 
   display: grid;
   place-items: center;
@@ -228,10 +235,9 @@ MAIN:
   content: '';
   width: 8px;
   height: 13px;
-  border: solid var(--clr-grey-800);
-  border-width: 0 2px 2px 0;
   transform: rotate(45deg);
   opacity: 0;
+  border: solid var(--clr-grey-800);
   border-width: 0 3px 3px 0;
 }
 
@@ -243,13 +249,14 @@ MAIN:
   opacity: 1;
 }
 
+/* Password Strength */
 .password-generator__strength {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: var(--space-md) var(--space-lg);
-  background-color: var(--clr-grey-850);
   margin-bottom: var(--space-lg);
+  background-color: var(--clr-grey-850);
 }
 
 .password-generator__strength-label {
@@ -272,6 +279,7 @@ MAIN:
   background-color: hotpink;
 }
 
+/* Generate Button */
 .password-generator__generate-button {
   display: flex;
   justify-content: center;
@@ -279,10 +287,10 @@ MAIN:
   gap: var(--space-md);
   width: 100%;
   height: 65px;
+  font-size: var(--fs-md);
+  text-transform: uppercase;
   border: none;
   background-color: var(--clr-green-200);
-  text-transform: uppercase;
-  font-size: var(--fs-md);
 }
 
 .password-generator__generate-button img {
