@@ -264,6 +264,17 @@ Password Generator Controls
   color: var(--clr-grey-600);
 }
 
+.password-generator__strength-feedback {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.password-generator__strength-text {
+  color: var(--clr-grey-200);
+  text-transform: uppercase;
+  font-size: var(--fs-lg);
+}
+
 .password-generator__strength-bars {
   display: flex;
   gap: 8px;
@@ -276,7 +287,8 @@ Password Generator Controls
 }
 
 .password-generator__strength-bar--active {
-  background-color: hotpink;
+  background-color: var(--clr-yellow-300);
+  border: none;
 }
 
 /* Generate Button */

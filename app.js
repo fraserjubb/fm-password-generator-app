@@ -15,6 +15,8 @@ const symbolsCheckbox = document.querySelector('#symbols');
 
 const strengthLocation = document.querySelector('.password-generator__strength-bars');
 
+const strengthText = document.querySelector('.password-generator__strength-text');
+
 const strengthBarArray = Array.from(document.querySelectorAll('.password-generator__strength-bar'));
 
 /* 
@@ -57,22 +59,27 @@ function getPasswordStrength(enabledGroups, characterLength) {
 
   if (enabledGroups.length === 0) return;
 
-  if (characterLength <= 8) {
+  if (characterLength <= 7) {
     strengthLevel = 1;
+    strengthText.textContent = 'Too Weak';
   } else if (characterLength >= 16) {
     strengthLevel = 4;
+    strengthText.textContent = 'Strong';
   } else if (characterLength >= 12) {
     strengthLevel = 3;
+    strengthText.textContent = 'Medium';
   } else {
-    strengthLevel = 2; // 9–11 character length
+    strengthLevel = 2; // 8–11 character length
+    strengthText.textContent = 'Weak';
   }
 
   const passwordStrength = Math.min(strengthLevel, 4);
-  // console.log(passwordStrength);
 
   for (let i = 0; i <= passwordStrength - 1; i++) {
     strengthBarArray[i].classList.add('password-generator__strength-bar--active');
   }
+
+  strengthText.classList.remove('hidden');
 }
 
 function clearUI() {
@@ -97,10 +104,9 @@ function getPassword(requestedLength) {
   const enabledCharacterGroups = getEnabledCharacterGroups();
 
   clearUI();
-  getPasswordStrength(enabledCharacterGroups, selectedCharacterLength);
 
   // Prevent a password being generated if no character groups are enabled:
-  if (enabledCharacterGroups.length === 0) {
+  if (enabledCharacterGroups.length === 0 || requestedLength === 0) {
     throw new Error('No character groups have been selected for character generation.');
   }
 
@@ -108,6 +114,8 @@ function getPassword(requestedLength) {
   if (enabledCharacterGroups.length > requestedLength) {
     throw new Error('The requested password length is shorter than the enabled character groups.');
   }
+
+  getPasswordStrength(enabledCharacterGroups, selectedCharacterLength);
 
   // Get at least one character from each selected character group:
   for (let i = 0; i < enabledCharacterGroups.length; i++) {
