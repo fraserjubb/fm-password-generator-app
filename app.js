@@ -23,6 +23,9 @@ const clipboardBtn = document.querySelector('.password-generator__display-clipbo
 
 const copyMessage = document.querySelector('.copy-message');
 
+const helperText = document.querySelector('.password-generator__helper');
+
+let hasTriedGeneration = false;
 /* 
 ********************************
 GLOBAL VARIABLES / OBJECTS:
@@ -54,7 +57,6 @@ function shuffle(array) {
 }
 
 function getRandomIndex(array) {
-  // console.log(Math.floor(Math.random() * array.length));
   return Math.floor(Math.random() * array.length);
 }
 
@@ -109,16 +111,6 @@ function getPassword(requestedLength) {
 
   clearUI();
 
-  // Prevent a password being generated if no character groups are enabled:
-  if (enabledCharacterGroups.length === 0 || requestedLength === 0) {
-    throw new Error('No character groups have been selected for character generation.');
-  }
-
-  // Prevent a password being generated if the requested length is too short:
-  if (enabledCharacterGroups.length > requestedLength) {
-    throw new Error('The requested password length is shorter than the enabled character groups.');
-  }
-
   getPasswordStrength(enabledCharacterGroups, selectedCharacterLength);
 
   // Get at least one character from each selected character group:
@@ -153,6 +145,29 @@ function showCopiedMessage() {
   setTimeout(() => copyMessage.classList.remove('is-visible'), 2000);
 }
 
+function updateGenerateButtonState() {
+  const requestedLength = Number(passwordLengthSlider.value);
+  const anyCharacterGroup = hasEnabledCharacterGroups();
+  const enabledCharacterGroups = getEnabledCharacterGroups();
+
+  generateBtn.disabled = !anyCharacterGroup || requestedLength === 0 || enabledCharacterGroups.length > requestedLength;
+
+  if (hasTriedGeneration) {
+    if (!anyCharacterGroup) {
+      helperText.textContent = 'Select at least one character type';
+    } else if (enabledCharacterGroups && enabledCharacterGroups.length > requestedLength) {
+      helperText.textContent = 'Length less than selected types';
+    } else if (requestedLength === 0) {
+      helperText.textContent = 'Password length must be at least 1';
+    } else {
+      helperText.textContent = ''; // clear message if all is valid
+    }
+  }
+}
+function hasEnabledCharacterGroups() {
+  return uppercaseCheckbox.checked || lowercaseCheckbox.checked || numbersCheckbox.checked || symbolsCheckbox.checked;
+}
+
 /*
 ********************************
 EVENT LISTENERS:
@@ -160,10 +175,16 @@ EVENT LISTENERS:
 */
 passwordLengthSlider.addEventListener('input', event => {
   passwordLengthValueEl.textContent = event.target.value;
+  updateGenerateButtonState();
+});
+
+[uppercaseCheckbox, lowercaseCheckbox, numbersCheckbox, symbolsCheckbox].forEach(checkbox => {
+  checkbox.addEventListener('change', updateGenerateButtonState);
 });
 
 generateBtn.addEventListener('click', () => {
   selectedCharacterLength = Number(passwordLengthValueEl.textContent);
+  hasTriedGeneration = true;
   getPassword(selectedCharacterLength);
 });
 
@@ -171,3 +192,5 @@ clipboardBtn.addEventListener('click', () => {
   if (password.textContent === 'P4$5W0rD!') return;
   copyText(password.textContent);
 });
+
+updateGenerateButtonState();
