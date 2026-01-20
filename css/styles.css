@@ -142,9 +142,16 @@ Password Generator Display
   position: relative;
   background: var(--clr-grey-800);
   border: none;
+  color: var(--clr-green-200);
+}
+
+.password-generator__display-clipboard:hover {
+  cursor: pointer;
+  color: white;
 }
 
 .copy-message {
+  pointer-events: none;
   position: absolute;
   bottom: -1.5rem;
   left: 50%;
@@ -164,7 +171,7 @@ Password Generator Controls
 ****
 */
 .password-generator__panel {
-  padding: 33px var(--space-lg) 42px;
+  padding: var(--space-lg) var(--space-lg) 42px;
   background-color: var(--clr-grey-800);
 }
 
@@ -172,6 +179,7 @@ Password Generator Controls
 .password-generator__character-length {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 26px;
 }
 
@@ -216,6 +224,12 @@ Password Generator Controls
   background: var(--clr-grey-200);
 }
 
+#password-length::-webkit-slider-thumb:hover {
+  cursor: pointer;
+  background-color: var(--clr-grey-850);
+  border: 2px solid var(--clr-green-200);
+}
+
 /* Character groups checkboxes */
 .password-generator__checkbox-group {
   margin: var(--space-lg) 0;
@@ -227,6 +241,11 @@ Password Generator Controls
   gap: var(--space-md);
   align-items: center;
   margin-bottom: var(--space-sm);
+}
+
+.password-generator__checkbox-group label:hover {
+  cursor: pointer;
+  color: var(--clr-green-200);
 }
 
 .password-generator__checkbox-group div:last-of-type {
@@ -246,6 +265,11 @@ Password Generator Controls
   place-items: center;
 }
 
+.password-generator__checkbox-group input[type='checkbox']:hover {
+  cursor: pointer;
+  border: 2px solid var(--clr-green-200);
+}
+
 .password-generator__checkbox-group input[type='checkbox']::after {
   content: '';
   width: 8px;
@@ -258,6 +282,7 @@ Password Generator Controls
 
 .password-generator__checkbox-group input[type='checkbox']:checked {
   background: var(--clr-green-200);
+  border: 2px solid var(--clr-green-200);
 }
 
 .password-generator__checkbox-group input[type='checkbox']:checked::after {
@@ -324,6 +349,12 @@ Password Generator Controls
   width: 12px;
 }
 
+.password-generator__generate-button:hover {
+  cursor: pointer;
+  border: 2px solid var(--clr-green-200);
+  color: var(--clr-green-200);
+  background-color: var(--clr-grey-800);
+}
 /* 
 ********************************
 FOOTER:
