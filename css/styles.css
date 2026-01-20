@@ -153,14 +153,16 @@ Password Generator Display
 .copy-message {
   pointer-events: none;
   position: absolute;
-  bottom: -1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
+  top: 50%;
+  right: calc(100% + 1rem);
+  transform: translateY(-50%);
+  font-size: var(--fs-md);
+  text-transform: uppercase;
   color: var(--clr-green-200);
   opacity: 0;
   transition: opacity 0.2s ease;
 }
+
 .copy-message.is-visible {
   opacity: 1;
 }
@@ -189,6 +191,12 @@ Password Generator Controls
 .password-generator__length-value {
   font-size: var(--fs-xl);
   color: var(--clr-green-200);
+}
+
+.password-generator__helper {
+  color: var(--clr-red-500);
+  display: flex;
+  justify-content: center;
 }
 
 #password-length {
@@ -355,6 +363,12 @@ Password Generator Controls
   color: var(--clr-green-200);
   background-color: var(--clr-grey-800);
 }
+
+.password-generator__generate-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* 
 ********************************
 FOOTER:
