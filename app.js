@@ -3,9 +3,9 @@
 DOM SELECTORS:
 ********************************
 */
-const password = document.querySelector('.password-generator__display-text');
-const generateBtn = document.querySelector('.password-generator__generate-button');
-const passwordLengthValueEl = document.querySelector('.password-generator__length-value');
+const passwordDisplay = document.querySelector('.password-generator__display-text');
+const generateButton = document.querySelector('.password-generator__generate-button');
+const passwordLengthValue = document.querySelector('.password-generator__length-value');
 const passwordLengthSlider = document.querySelector('#password-length');
 
 const uppercaseCheckbox = document.querySelector('#uppercase');
@@ -14,18 +14,17 @@ const numbersCheckbox = document.querySelector('#numbers');
 const symbolsCheckbox = document.querySelector('#symbols');
 
 const strengthLocation = document.querySelector('.password-generator__strength-bars');
-
 const strengthText = document.querySelector('.password-generator__strength-text');
-
 const strengthBarArray = Array.from(document.querySelectorAll('.password-generator__strength-bar'));
 
 const clipboardBtn = document.querySelector('.password-generator__display-clipboard');
-
 const copyMessage = document.querySelector('.copy-message');
 
 const helperText = document.querySelector('.password-generator__helper');
 
 let hasTriedGeneration = false;
+let selectedCharacterLength;
+
 /* 
 ********************************
 GLOBAL VARIABLES / OBJECTS:
@@ -40,13 +39,16 @@ const characterGroups = {
   includeSymbols: { enabled: false, chars: '!@#$%^&*()-_+=.?|,' },
 };
 
-let selectedCharacterLength;
-
-passwordLengthValueEl.textContent = passwordLengthSlider.value;
 /* 
 ********************************
 FUNCTIONS:
 ********************************
+*/
+
+/*
+****
+Utility Functions
+****
 */
 // Shuffle using Fisher–Yates algorithm:
 function shuffle(array) {
@@ -58,6 +60,63 @@ function shuffle(array) {
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
+}
+
+function clearUI() {
+  strengthBarArray.forEach(bar => bar.classList.remove('password-generator__strength-bar--active'));
+}
+
+function hasEnabledCharacterGroups() {
+  return uppercaseCheckbox.checked || lowercaseCheckbox.checked || numbersCheckbox.checked || symbolsCheckbox.checked;
+}
+
+/*
+****
+Password Functions
+****
+*/
+function getActiveCharacterGroups() {
+  characterGroups.includeUppercase.enabled = uppercaseCheckbox.checked;
+  characterGroups.includeLowercase.enabled = lowercaseCheckbox.checked;
+  characterGroups.includeNumbers.enabled = numbersCheckbox.checked;
+  characterGroups.includeSymbols.enabled = symbolsCheckbox.checked;
+
+  // Find character groups that are enabled:
+  const enabledCharacterGroups = Object.values(characterGroups)
+    .filter(param => param.enabled)
+    .map(param => param.chars.split(''));
+  return enabledCharacterGroups;
+}
+
+function getPassword(requestedLength) {
+  const passwordPool = [];
+  const enabledCharacterGroups = getActiveCharacterGroups();
+
+  clearUI();
+
+  getPasswordStrength(enabledCharacterGroups, selectedCharacterLength);
+
+  // Get at least one character from each selected character group:
+  for (let i = 0; i < enabledCharacterGroups.length; i++) {
+    const selectedCharacter = enabledCharacterGroups[i][getRandomIndex(enabledCharacterGroups[i])];
+    passwordPool.push(selectedCharacter);
+  }
+
+  // Get the remaining characters:
+  const remainingLength = requestedLength - enabledCharacterGroups.length;
+  for (let i = 0; i < remainingLength; i++) {
+    const chosenArray = enabledCharacterGroups[getRandomIndex(enabledCharacterGroups)];
+    const randomCharacter = chosenArray[getRandomIndex(chosenArray)];
+    passwordPool.push(randomCharacter);
+  }
+
+  // Final password:
+  shuffle(passwordPool);
+  const generatedPassword = passwordPool.join('');
+  passwordDisplay.textContent = generatedPassword;
+  passwordDisplay.style.color = 'var(--clr-grey-200)';
+
+  return generatedPassword;
 }
 
 function getPasswordStrength(enabledGroups, characterLength) {
@@ -88,54 +147,12 @@ function getPasswordStrength(enabledGroups, characterLength) {
   strengthText.classList.remove('hidden');
 }
 
-function clearUI() {
-  strengthBarArray.forEach(bar => bar.classList.remove('password-generator__strength-bar--active'));
-}
-
-function getEnabledCharacterGroups() {
-  characterGroups.includeUppercase.enabled = uppercaseCheckbox.checked;
-  characterGroups.includeLowercase.enabled = lowercaseCheckbox.checked;
-  characterGroups.includeNumbers.enabled = numbersCheckbox.checked;
-  characterGroups.includeSymbols.enabled = symbolsCheckbox.checked;
-
-  // Find character groups that are enabled:
-  const enabledCharacterGroups = Object.values(characterGroups)
-    .filter(param => param.enabled)
-    .map(param => param.chars.split(''));
-  return enabledCharacterGroups;
-}
-
-function getPassword(requestedLength) {
-  const passwordPool = [];
-  const enabledCharacterGroups = getEnabledCharacterGroups();
-
-  clearUI();
-
-  getPasswordStrength(enabledCharacterGroups, selectedCharacterLength);
-
-  // Get at least one character from each selected character group:
-  for (let i = 0; i < enabledCharacterGroups.length; i++) {
-    const selectedCharacter = enabledCharacterGroups[i][getRandomIndex(enabledCharacterGroups[i])];
-    passwordPool.push(selectedCharacter);
-  }
-
-  // Get the remaining characters:
-  const remainingLength = requestedLength - enabledCharacterGroups.length;
-  for (let i = 0; i < remainingLength; i++) {
-    const chosenArray = enabledCharacterGroups[getRandomIndex(enabledCharacterGroups)];
-    const randomCharacter = chosenArray[getRandomIndex(chosenArray)];
-    passwordPool.push(randomCharacter);
-  }
-
-  // Final password:
-  shuffle(passwordPool);
-  const generatedPassword = passwordPool.join('');
-  password.textContent = generatedPassword;
-  password.style.color = 'var(--clr-grey-200)';
-  return generatedPassword;
-}
-
-// COPY PASSWORD
+/*
+****
+Copy Functions
+****
+*/
+// Copy password
 function copyText(text) {
   navigator.clipboard.writeText(text).then(() => showCopiedMessage());
 }
@@ -145,15 +162,20 @@ function showCopiedMessage() {
   setTimeout(() => copyMessage.classList.remove('is-visible'), 2000);
 }
 
+/*
+****
+Helper/UI Functions
+****
+*/
 function updateGenerateButtonState() {
   const requestedLength = Number(passwordLengthSlider.value);
-  const anyCharacterGroup = hasEnabledCharacterGroups();
-  const enabledCharacterGroups = getEnabledCharacterGroups();
+  const isAnyCharacterGroup = hasEnabledCharacterGroups();
+  const enabledCharacterGroups = getActiveCharacterGroups();
 
-  generateBtn.disabled = !anyCharacterGroup || requestedLength === 0 || enabledCharacterGroups.length > requestedLength;
+  generateButton.disabled = !isAnyCharacterGroup || requestedLength === 0 || enabledCharacterGroups.length > requestedLength;
 
   if (hasTriedGeneration) {
-    if (!anyCharacterGroup) {
+    if (!isAnyCharacterGroup) {
       helperText.textContent = 'Select at least one character type';
     } else if (enabledCharacterGroups && enabledCharacterGroups.length > requestedLength) {
       helperText.textContent = 'Length less than selected types';
@@ -164,9 +186,6 @@ function updateGenerateButtonState() {
     }
   }
 }
-function hasEnabledCharacterGroups() {
-  return uppercaseCheckbox.checked || lowercaseCheckbox.checked || numbersCheckbox.checked || symbolsCheckbox.checked;
-}
 
 /*
 ********************************
@@ -174,7 +193,7 @@ EVENT LISTENERS:
 ********************************
 */
 passwordLengthSlider.addEventListener('input', event => {
-  passwordLengthValueEl.textContent = event.target.value;
+  passwordLengthValue.textContent = event.target.value;
   updateGenerateButtonState();
 });
 
@@ -182,15 +201,21 @@ passwordLengthSlider.addEventListener('input', event => {
   checkbox.addEventListener('change', updateGenerateButtonState);
 });
 
-generateBtn.addEventListener('click', () => {
-  selectedCharacterLength = Number(passwordLengthValueEl.textContent);
+generateButton.addEventListener('click', () => {
+  selectedCharacterLength = Number(passwordLengthValue.textContent);
   hasTriedGeneration = true;
   getPassword(selectedCharacterLength);
 });
 
 clipboardBtn.addEventListener('click', () => {
-  if (password.textContent === 'P4$5W0rD!') return;
-  copyText(password.textContent);
+  if (passwordDisplay.textContent === 'P4$5W0rD!') return;
+  copyText(passwordDisplay.textContent);
 });
 
+/*
+********************************
+INITIALIZATION:
+********************************
+*/
+passwordLengthValue.textContent = passwordLengthSlider.value;
 updateGenerateButtonState();
