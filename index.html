@@ -18,7 +18,11 @@
       <div class="password-generator__container">
         <section class="password-generator__display">
           <output class="password-generator__display-text" aria-live="polite">P4$5W0rD!</output>
-          <button class="password-generator__display-clipboard"><img src="assets/images/icon-copy.svg" alt="Copy password" /></button>
+          <button class="password-generator__display-clipboard">
+            <img src="assets/images/icon-copy.svg" alt="Copy password" />
+
+            <span class="copy-message" role="status" aria-live="polite">Copied!</span>
+          </button>
         </section>
         <section class="password-generator__panel">
           <div class="password-generator__character-length">
