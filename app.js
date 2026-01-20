@@ -19,6 +19,10 @@ const strengthText = document.querySelector('.password-generator__strength-text'
 
 const strengthBarArray = Array.from(document.querySelectorAll('.password-generator__strength-bar'));
 
+const clipboardBtn = document.querySelector('.password-generator__display-clipboard');
+
+const copyMessage = document.querySelector('.copy-message');
+
 /* 
 ********************************
 GLOBAL VARIABLES / OBJECTS:
@@ -135,7 +139,18 @@ function getPassword(requestedLength) {
   shuffle(passwordPool);
   const generatedPassword = passwordPool.join('');
   password.textContent = generatedPassword;
+  password.style.color = 'var(--clr-grey-200)';
   return generatedPassword;
+}
+
+// COPY PASSWORD
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => showCopiedMessage());
+}
+
+function showCopiedMessage() {
+  copyMessage.classList.add('is-visible');
+  setTimeout(() => copyMessage.classList.remove('is-visible'), 2000);
 }
 
 /*
@@ -150,4 +165,9 @@ passwordLengthSlider.addEventListener('input', event => {
 generateBtn.addEventListener('click', () => {
   selectedCharacterLength = Number(passwordLengthValueEl.textContent);
   getPassword(selectedCharacterLength);
+});
+
+clipboardBtn.addEventListener('click', () => {
+  if (password.textContent === 'P4$5W0rD!') return;
+  copyText(password.textContent);
 });
