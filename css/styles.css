@@ -28,12 +28,15 @@
   --fs-xl: 2rem; /* 32px */
 
   /* Containers & Dimensions */
-  --wrapper-width: 90rem; /* 1440px */
   --panel-width: 540px; /* 540px */
 
   /* Spacing scale (rem) */
+  --space-2xs: 0.125rem; /* 2px */
+  --space-xs: 0.5rem; /* 8px */
+  --space-xs-2: 0.625rem; /* 10px */
   --space-sm: 1rem; /* 16px */
   --space-md: 1.5rem; /* 24px */
+  --space-md-2: 1.75rem; /* 28px */
   --space-lg: 2rem; /* 32px */
 
   /* Border-radius scale */
@@ -80,7 +83,6 @@ GLOBAL CSS VALUES:
 body {
   font-family: 'JetBrains Mono', sans-serif;
   font-size: var(--fs-md);
-  /* font-weight: 400; */
   line-height: var(--lh-base);
   letter-spacing: 0;
 
@@ -104,7 +106,7 @@ MAIN:
 */
 .password-generator {
   width: var(--panel-width);
-  margin: 133px auto;
+  margin: 8.25rem auto; /* 132px */
 }
 
 /* Heading */
@@ -113,9 +115,6 @@ MAIN:
   font-size: var(--fs-lg);
   text-align: center;
   color: var(--clr-grey-600);
-}
-
-.password-generator__container {
 }
 
 /* 
@@ -127,7 +126,7 @@ Password Generator Display
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 80px;
+  height: 5rem; /* 80px */
   padding: var(--space-sm) var(--space-lg);
   margin-bottom: var(--space-sm);
   color: var(--clr-grey-700);
@@ -173,7 +172,7 @@ Password Generator Controls
 ****
 */
 .password-generator__panel {
-  padding: var(--space-lg) var(--space-lg) 42px;
+  padding: var(--space-lg) var(--space-lg) 2.625rem; /* 42px */
   background-color: var(--clr-grey-800);
 }
 
@@ -182,10 +181,7 @@ Password Generator Controls
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 26px;
-}
-
-.password-generator__label {
+  margin-bottom: 1.625rem; /* 26px */
 }
 
 .password-generator__length-value {
@@ -201,19 +197,19 @@ Password Generator Controls
 
 #password-length {
   width: 100%;
-  margin: 10px 0;
+  margin: var(--space-xs-2) 0; /* 10px */
   border-radius: 0;
 }
 
 /* Chrome / Safari */
 #password-length::-webkit-slider-runnable-track {
-  height: 8px;
+  height: var(--space-xs); /* 8px */
   background: var(--clr-grey-850);
 }
 
 /* Firefox */
 #password-length::-moz-range-track {
-  height: 8px;
+  height: var(--space-xs); /* 8px */
   background: var(--clr-grey-850);
 }
 
@@ -225,9 +221,9 @@ Password Generator Controls
 #password-length::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 28px;
-  height: 28px;
-  margin-top: -10px;
+  width: var(--space-md-2); /* 28px */
+  height: var(--space-md-2); /* 28px */
+  margin-top: calc(var(--space-xs-2) * -1); /* -10px */
   border-radius: var(--radius-circle);
   background: var(--clr-grey-200);
 }
@@ -235,7 +231,7 @@ Password Generator Controls
 #password-length::-webkit-slider-thumb:hover {
   cursor: pointer;
   background-color: var(--clr-grey-850);
-  border: 2px solid var(--clr-green-200);
+  border: var(--space-2xs) solid var(--clr-green-200); /* 2px */
 }
 
 /* Character groups checkboxes */
@@ -264,9 +260,9 @@ Password Generator Controls
   -webkit-appearance: none;
   appearance: none;
 
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--clr-grey-200);
+  width: 1.25rem; /* 20px */
+  height: 1.25rem; /* 20px */
+  border: var(--space-2xs) solid var(--clr-grey-200); /* 2px */
   background: var(--clr-grey-800);
 
   display: grid;
@@ -275,22 +271,22 @@ Password Generator Controls
 
 .password-generator__checkbox-group input[type='checkbox']:hover {
   cursor: pointer;
-  border: 2px solid var(--clr-green-200);
+  border: var(--space-2xs) solid var(--clr-green-200); /* 2px */
 }
 
 .password-generator__checkbox-group input[type='checkbox']::after {
   content: '';
-  width: 8px;
-  height: 13px;
+  width: var(--space-xs); /* 8px */
+  height: 0.75rem; /* 12px */
   transform: rotate(45deg);
   opacity: 0;
   border: solid var(--clr-grey-800);
-  border-width: 0 3px 3px 0;
+  border-width: 0 0.125rem 0.125rem 0; /* 2px */
 }
 
 .password-generator__checkbox-group input[type='checkbox']:checked {
   background: var(--clr-green-200);
-  border: 2px solid var(--clr-green-200);
+  border: var(--space-2xs) solid var(--clr-green-200); /* 2px */
 }
 
 .password-generator__checkbox-group input[type='checkbox']:checked::after {
@@ -303,6 +299,7 @@ Password Generator Controls
   justify-content: space-between;
   align-items: center;
   padding: var(--space-md) var(--space-lg);
+  height: 4.5rem; /* 72px */
   margin-bottom: var(--space-lg);
   background-color: var(--clr-grey-850);
 }
@@ -325,13 +322,13 @@ Password Generator Controls
 
 .password-generator__strength-bars {
   display: flex;
-  gap: 8px;
+  gap: var(--space-xs); /* 8px */
 }
 
 .password-generator__strength-bar {
-  width: 10px;
-  height: 28px;
-  border: solid 2px var(--clr-grey-200);
+  width: var(--space-xs-2); /* 10px */
+  height: var(--space-md-2); /* 28px */
+  border: var(--space-2xs) solid var(--clr-grey-200); /* 2px */
 }
 
 .password-generator__strength-bar--active {
@@ -346,7 +343,7 @@ Password Generator Controls
   align-items: center;
   gap: var(--space-md);
   width: 100%;
-  height: 65px;
+  height: 4.125rem; /* 66px */
   font-size: var(--fs-md);
   text-transform: uppercase;
   border: none;
@@ -354,12 +351,12 @@ Password Generator Controls
 }
 
 .password-generator__generate-button img {
-  width: 12px;
+  width: 0.75rem; /* 12px */
 }
 
 .password-generator__generate-button:hover {
   cursor: pointer;
-  border: 2px solid var(--clr-green-200);
+  border: var(--space-2xs) solid var(--clr-green-200); /* 2px */
   color: var(--clr-green-200);
   background-color: var(--clr-grey-800);
 }
@@ -374,8 +371,6 @@ Password Generator Controls
 FOOTER:
 ********************************
 */
-
-/*UPDATE VALUES!*/
 .attribution {
   text-align: center;
   margin-bottom: var(--space-xl);
