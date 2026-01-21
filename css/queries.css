@@ -1,15 +1,67 @@
 /* 
 ********************************
-TABLET:
-********************************
-*/
-@media (max-width: 1175px) {
-}
-
 /* 
 ********************************
 MOBILE:
 ********************************
 */
 @media (max-width: 640px) {
+  :root {
+    /* Containers & Dimensions */
+    --panel-width: 21.44rem; /* 343px */
+  }
+
+  body {
+    font-size: var(--fs-sm);
+  }
+
+  .password-generator {
+    width: var(--panel-width);
+    margin: 62px auto; /* 62px */
+  }
+
+  .password-generator__title {
+    font-size: var(--fs-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .password-generator__panel {
+    padding: var(--space-sm);
+  }
+
+  .password-generator__character-length {
+    margin-bottom: 8px;
+  }
+
+  .password-generator__display {
+    height: 64px; /* 64px */
+
+    padding: var(--space-sm);
+  }
+
+  .password-generator__display-clipboard svg {
+    width: var(--space-sm);
+  }
+  .copy-message {
+    font-size: var(--fs-sm);
+  }
+
+  .password-generator__display-text,
+  .password-generator__length-value {
+    font-size: var(--fs-lg);
+  }
+
+  .password-generator__strength {
+    height: 56px;
+    padding: 16px;
+    margin-bottom: var(--space-sm);
+  }
+
+  .password-generator__strength-text {
+    font-size: var(--fs-md);
+  }
+
+  .password-generator__generate-button {
+    height: 56px; /* 56px */
+  }
 }
