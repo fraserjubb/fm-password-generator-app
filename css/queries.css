@@ -1,7 +1,5 @@
 /* 
 ********************************
-/* 
-********************************
 MOBILE:
 ********************************
 */
@@ -15,26 +13,34 @@ MOBILE:
     font-size: var(--fs-sm);
   }
 
+  /* 
+********************************
+MAIN:
+********************************
+*/
   .password-generator {
     width: var(--panel-width);
-    margin: 62px auto; /* 62px */
+    margin: 3.875rem auto; /* 62px */
   }
 
+  .password-generator__display-text,
+  .password-generator__length-value {
+    font-size: var(--fs-lg);
+  }
+
+  /* Heading */
   .password-generator__title {
     font-size: var(--fs-sm);
     margin-bottom: var(--space-sm);
   }
 
-  .password-generator__panel {
-    padding: var(--space-sm);
-  }
-
-  .password-generator__character-length {
-    margin-bottom: 8px;
-  }
-
+  /* 
+****
+Password Generator Display 
+****
+*/
   .password-generator__display {
-    height: 64px; /* 64px */
+    height: 3.875rem; /* 64px */
 
     padding: var(--space-sm);
   }
@@ -46,14 +52,24 @@ MOBILE:
     font-size: var(--fs-sm);
   }
 
-  .password-generator__display-text,
-  .password-generator__length-value {
-    font-size: var(--fs-lg);
+  /* 
+****
+Password Generator Controls 
+****
+*/
+  .password-generator__panel {
+    padding: var(--space-sm);
   }
 
+  /* Character length */
+  .password-generator__character-length {
+    margin-bottom: var(--space-xs);
+  }
+
+  /* Password Strength */
   .password-generator__strength {
-    height: 56px;
-    padding: 16px;
+    height: 3.5rem; /* 56px */
+    padding: var(--space-sm);
     margin-bottom: var(--space-sm);
   }
 
@@ -61,7 +77,17 @@ MOBILE:
     font-size: var(--fs-md);
   }
 
+  /* Generate Button */
   .password-generator__generate-button {
-    height: 56px; /* 56px */
+    height: 3.5rem; /* 56px */
+  }
+
+  /* 
+********************************
+FOOTER:
+********************************
+*/
+  .attribution {
+    margin: var(--space-sm) var(--space-lg);
   }
 }
