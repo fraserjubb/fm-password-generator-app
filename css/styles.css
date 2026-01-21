@@ -28,7 +28,7 @@
   --fs-xl: 2rem; /* 32px */
 
   /* Containers & Dimensions */
-  --panel-width: 540px; /* 540px */
+  --panel-width: 33.75rem; /* 540px */
 
   /* Spacing scale (rem) */
   --space-2xs: 0.125rem; /* 2px */
@@ -149,12 +149,19 @@ Password Generator Display
   color: white;
 }
 
+/* Active / focus states (all sizes) */
+.password-generator__display-clipboard:active,
+.password-generator__display-clipboard:focus {
+  color: var(--clr-green-200); /* ensure it never changes on click */
+}
+
 .copy-message {
   pointer-events: none;
   position: absolute;
-  top: 50%;
-  right: calc(100% + 1rem);
-  transform: translateY(-50%);
+  top: 100%;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%) translateY(25%);
   font-size: var(--fs-md);
   text-transform: uppercase;
   color: var(--clr-green-200);
@@ -181,7 +188,7 @@ Password Generator Controls
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.625rem; /* 26px */
+  margin-bottom: var(--space-sm);
 }
 
 .password-generator__length-value {
