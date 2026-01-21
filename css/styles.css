@@ -241,6 +241,10 @@ Password Generator Controls
   border: var(--space-2xs) solid var(--clr-green-200); /* 2px */
 }
 
+#password-length::-webkit-slider-runnable-track {
+  background: transparent;
+}
+
 /* Character groups checkboxes */
 .password-generator__checkbox-group {
   margin: var(--space-lg) 0;

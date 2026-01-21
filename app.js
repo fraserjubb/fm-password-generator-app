@@ -164,6 +164,23 @@ function showCopiedMessage() {
 
 /*
 ****
+Slider Functions
+****
+*/
+function updateSliderTrack() {
+  const value = passwordLengthSlider.value;
+  const max = passwordLengthSlider.max;
+  const percent = (value / max) * 100;
+
+  passwordLengthSlider.style.background = `linear-gradient(
+    to right,
+    var(--clr-green-200) 0% ${percent}%,
+    var(--clr-grey-850) ${percent}% 100%
+  )`;
+}
+
+/*
+****
 Helper/UI Functions
 ****
 */
@@ -194,6 +211,7 @@ EVENT LISTENERS:
 */
 passwordLengthSlider.addEventListener('input', event => {
   passwordLengthValue.textContent = event.target.value;
+  updateSliderTrack();
   updateGenerateButtonState();
 });
 
@@ -219,3 +237,4 @@ INITIALIZATION:
 */
 passwordLengthValue.textContent = passwordLengthSlider.value;
 updateGenerateButtonState();
+updateSliderTrack();
