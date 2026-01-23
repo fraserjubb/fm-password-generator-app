@@ -158,8 +158,13 @@ function copyText(text) {
 }
 
 function showCopiedMessage() {
+  copyMessage.setAttribute('aria-hidden', 'false');
   copyMessage.classList.add('is-visible');
-  setTimeout(() => copyMessage.classList.remove('is-visible'), 2000);
+
+  setTimeout(() => {
+    copyMessage.classList.remove('is-visible');
+    copyMessage.setAttribute('aria-hidden', 'true');
+  }, 2000);
 }
 
 /*
