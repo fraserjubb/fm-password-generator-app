@@ -166,7 +166,7 @@ Password Generator Display
   text-transform: uppercase;
   color: var(--clr-green-200);
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .copy-message.is-visible {
@@ -406,6 +406,27 @@ FOOTER:
 .attribution a:hover,
 .attribution a:active {
   opacity: 0.75;
+}
+
+/* 
+********************************
+ACCESSIBILITY HELPERS:
+********************************
+*/
+.password-generator__display-clipboard:focus-visible,
+.password-generator__generate-button:focus-visible {
+  outline: 3px solid var(--clr-green-200);
+  outline-offset: 3px;
+}
+
+#password-length:focus-visible {
+  outline: 3px solid var(--clr-green-200);
+  outline-offset: 6px;
+}
+
+.password-generator__checkbox-group input[type='checkbox']:focus-visible {
+  outline: 3px solid var(--clr-green-200);
+  outline-offset: 3px;
 }
 
 /* 
