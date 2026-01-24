@@ -18,6 +18,10 @@ MOBILE:
 MAIN:
 ********************************
 */
+  .wrapper {
+    min-height: 80vh; /* reduce vertical dead space on mobile */
+  }
+
   .password-generator__display-text,
   .password-generator__length-value {
     font-size: var(--fs-lg);
