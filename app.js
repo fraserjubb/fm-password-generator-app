@@ -94,7 +94,7 @@ function getPassword(requestedLength) {
 
   clearUI();
 
-  getPasswordStrength(enabledCharacterGroups, selectedCharacterLength);
+  getPasswordStrength(enabledCharacterGroups, requestedLength);
 
   // Get at least one character from each selected character group:
   for (let i = 0; i < enabledCharacterGroups.length; i++) {
