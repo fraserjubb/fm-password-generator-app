@@ -104,9 +104,15 @@ svg {
 MAIN:
 ********************************
 */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
 .password-generator {
   width: var(--panel-width);
-  margin: 8.25rem auto; /* 132px */
 }
 
 /* Heading */
