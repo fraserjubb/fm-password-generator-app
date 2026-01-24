@@ -235,7 +235,8 @@ Password Generator Controls
   background: var(--clr-grey-200);
 }
 
-#password-length::-webkit-slider-thumb:hover {
+#password-length::-webkit-slider-thumb:hover,
+#password-length::-webkit-slider-thumb:active {
   cursor: pointer;
   background-color: var(--clr-grey-850);
   border: var(--space-2xs) solid var(--clr-green-200); /* 2px */
