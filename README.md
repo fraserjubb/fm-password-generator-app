@@ -25,7 +25,7 @@ This is a solution to [this challenge on Frontend Mentor](https://www.frontendme
 ### Project Links
 
 - Solution URL: [Click Here](INSERT URL HERE)
-- Live Site URL: [Click Here](INSERT URL HERE)
+- Live Site URL: [Click Here](https://fm-passwordgeneratorapp-fraser.netlify.app/)
 - Frontend Mentor Profile: [@fraserjubb](https://www.frontendmentor.io/profile/fraserjubb)
 
 ## My Process
