@@ -18,11 +18,6 @@ MOBILE:
 MAIN:
 ********************************
 */
-  .password-generator {
-    width: var(--panel-width);
-    margin: 3.875rem auto; /* 62px */
-  }
-
   .password-generator__display-text,
   .password-generator__length-value {
     font-size: var(--fs-lg);
